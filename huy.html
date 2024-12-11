@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quiz - Select Players</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 20px;
+    }
+    .player-section {
+      margin: 20px auto;
+      max-width: 400px;
+      text-align: left;
+    }
+    .player-section label {
+      display: block;
+      margin: 10px 0;
+    }
+    .btn {
+      margin-top: 20px;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <h1>Quiz - Select Players</h1>
+  <p>Add players (1 to 4 players)</p>
+
+  <div class="player-section" id="playerSection">
+    <label>
+      Player 1 Name: <input type="text" id="player1" required>
+    </label>
+    <label class="hidden" id="player2Label">
+      Player 2 Name: <input type="text" id="player2">
+    </label>
+    <label class="hidden" id="player3Label">
+      Player 3 Name: <input type="text" id="player3">
+    </label>
+    <label class="hidden" id="player4Label">
+      Player 4 Name: <input type="text" id="player4">
+    </label>
+    <button class="btn" onclick="addPlayer()">Add Player</button>
+    <button class="btn" onclick="startQuiz()">Start Quiz</button>
+  </div>
+
+  <script>
+    let playerCount = 1;
+
+    function addPlayer() {
+      if (playerCount < 4) {
+        playerCount++;
+        document.getElementById(`player${playerCount}Label`).classList.remove('hidden');
+      } else {
+        alert('Maximum of 4 players allowed!');
+      }
+    }
+
+    function startQuiz() {
+      const players = [];
+      for (let i = 1; i <= playerCount; i++) {
+        const playerName = document.getElementById(`player${i}`).value;
+        if (playerName.trim() === '') {
+          alert(`Player ${i} name cannot be empty!`);
+          return;
+        }
+        players.push(playerName);
+      }
+      alert(`Starting quiz with players: ${players.join(', ')}`);
+      // Here you can redirect to the quiz screen or initialize the quiz
+    }
+  </script>
+</body>
+</html>
